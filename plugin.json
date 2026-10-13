@@ -30,8 +30,15 @@
         "defaultPrompt": [
           "Write a reply in my voice.",
           "Rewrite this in my voice."
-        ]
+        ],
+        "supportURL": "https://idiolect.app/support"
       }
     }
-  }
+  },
+  "keywords": [
+    "writing",
+    "personalization",
+    "writing-profile",
+    "productivity"
+  ]
 }

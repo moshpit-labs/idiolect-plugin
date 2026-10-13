@@ -10,11 +10,12 @@ const exactKeys = (value, keys) => assert.deepEqual(Object.keys(value).sort(), [
 
 export function validate(root) {
   const portable = readJson(root, 'plugin.json');
-  exactKeys(portable, ['$schema', 'name', 'version', 'description', 'author', 'homepage', 'repository', 'license', 'extensions']);
+  exactKeys(portable, ['$schema', 'name', 'version', 'description', 'author', 'homepage', 'repository', 'license', 'keywords', 'extensions']);
   assert.equal(portable.$schema, `${schemas}plugin.schema.json`);
   assert.equal(portable.name, 'idiolect');
   assert.match(portable.version, /^\d+\.\d+\.\d+$/);
   assert.equal(portable.author.name, 'Idiolect AI');
+  assert.ok(portable.keywords.includes('writing'));
   const openai = portable.extensions['com.openai'];
   assert.equal(openai.interface.displayName, 'Idiolect AI');
   for (const key of ['logo', 'composerIcon']) {
@@ -40,6 +41,14 @@ export function validate(root) {
     const manifest = readJson(root, file);
     assert.equal(manifest.version, portable.version, `${file}: version drift`);
   }
+  const openaiMcp = readJson(root, 'submission/openai/mcp.json');
+  assert.equal(openaiMcp.$schema, `${schemas}mcp.schema.json`);
+  exactKeys(openaiMcp.mcpServers, ['idiolect']);
+  const openaiServer = openaiMcp.mcpServers.idiolect;
+  exactKeys(openaiServer, ['type', 'url', 'extensions']);
+  assert.equal(openaiServer.type, 'streamable-http');
+  assert.equal(openaiServer.url, endpoint);
+  assert.deepEqual(openaiServer.extensions, { 'com.openai': { auth: { type: 'oauth' } } }, 'OpenAI import must declare OAuth');
   const compatibility = readJson(root, '.codex-plugin/plugin.json');
   assert.equal(compatibility.mcpServers, './.mcp.json');
   assert.equal(compatibility.skills, './skills/');

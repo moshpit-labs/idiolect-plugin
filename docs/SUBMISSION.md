@@ -16,6 +16,7 @@ Prepared 13 October 2026. This is a local package, not a submitted or published 
 - Privacy: `https://idiolect.app/privacy`
 - Terms: `https://idiolect.app/terms`
 - Logo: `assets/logo.png`, copied unchanged from the product's existing connector asset
+- Cline listing logo: `assets/logo-400.png`, a mechanical 400×400 resize of the same connector PNG
 - Additional brand mark: `assets/logo.svg`, copied unchanged from the product
 
 ## Format decisions and primary sources
@@ -24,7 +25,7 @@ Read on 13 October 2026:
 
 - [Claude Code manifest reference](https://code.claude.com/docs/en/plugins-reference): `.claude-plugin/plugin.json`, root skill/command directories, and `.mcp.json`; strict CLI validation is authoritative for the manifest. Listing metadata belongs in the plugin manifest, not its marketplace entry.
 - [OpenAI packaging](https://developers.openai.com/plugins/build/plugins): root Agent Plugins manifest and `mcp.json` are preferred. `.codex-plugin/plugin.json` remains a compatibility format. Remote MCP transport is `streamable-http`. Public submission needs a remote HTTPS endpoint and its own review.
-- [Agent Plugins manifest schema](https://agent-plugins.org/schemas/1.0.0/plugin.schema.json) and [MCP schema](https://agent-plugins.org/schemas/1.0.0/mcp.schema.json): portable paths and transport format. Keep server config minimal for portability; let OAuth discovery supply settings rather than adding vendor extensions to the shared server entry.
+- [Agent Plugins manifest schema](https://agent-plugins.org/schemas/1.0.0/plugin.schema.json) and [MCP schema](https://agent-plugins.org/schemas/1.0.0/mcp.schema.json): portable paths and transport format. The shared server entry remains schema-minimal. The explicit OpenAI submission variant adds the vendor-documented OAuth declaration; see the staging steps below.
 - [Cursor plugin reference](https://cursor.com/docs/reference/plugins): root Agent Plugins packages load in Cursor; a separate Cursor manifest is unnecessary for this skill and remote server. No plugin-root variables are needed.
 - [Gemini extension reference](https://geminicli.com/docs/extensions/reference/) and [MCP OAuth reference](https://geminicli.com/docs/tools/mcp-server/): `gemini-extension.json`, shared `skills/`, `httpUrl`, and automatic OAuth discovery are supported. This does not prove callback compatibility with the hosted provider.
 
@@ -44,4 +45,21 @@ The refresh removes the obsolete bundled stdio server instead of shipping two de
 
 The deterministic validator checks hosted transport parity, absence of credential configuration, required skill and command artifacts, version parity, and listing assets. Mutation tests reject a local-server regression, embedded client secret, wrong portable transport, and a missing asset.
 
-Claude Code 2.1.281 strict plugin and marketplace validation passed. The installed Codex launcher failed before startup because its native executable was missing. No authenticated installation, OAuth round trip, writing call, host-policy probe, or directory acceptance is claimed. No product model calls were made.
+Claude Code 2.1.281 strict plugin and marketplace validation passed. Codex CLI 0.160.1 runs from the Node v24.15.0 installation. The orchestrator reached live OAuth consent using a temporary configuration override; the callback awaits user action. Package installation and writing were not exercised. No authenticated installation, completed OAuth round trip, writing call, host-policy probe, or directory acceptance is claimed. No product model calls were made.
+
+
+## OpenAI authentication import variant
+
+The [OpenAI submission field reference](https://developers.openai.com/plugins/deploy/submission) confirms that portable packages discover root `skills/` and `mcp.json` automatically. The root `extensions.com.openai` object replaces the compatibility overlay; no duplicate `mcpServers` mapping is needed or effective for a portable package. Keywords are optional and included for discovery.
+
+OpenAI's current [MCP authentication reference](https://developers.openai.com/plugins/build/plugins#configure-mcp-authentication) requires `extensions.com.openai.auth.type` set to `oauth` on each protected server. Its submission guide says the portal imports advanced auth settings from `mcp.json`; the connection panel does not offer an advanced OAuth editor. Do not upload the shared portable `mcp.json` unchanged and assume the portal discovers the authentication method.
+
+The published Agent Plugins 1.0.0 MCP schema rejects extra server fields, including `extensions`, while OpenAI documents and accepts its own extension. To preserve portable schema compatibility, `submission/openai/mcp.json` contains the OpenAI import variant. It uses the documented `streamable-http`, `url`, and `extensions.com.openai.auth` shape with only `type: oauth`. OAuth client mode, endpoints, and scopes remain omitted for discovery. No credentials are embedded. Our deterministic validator checks this exact supported shape; it is not a claim that the OpenAI portal has accepted it.
+
+Before an authorized OpenAI upload:
+
+1. Copy the checked-out package to a separate staging directory without Git files.
+2. Copy `submission/openai/mcp.json` over that staging directory's root `mcp.json`. Keep the repository's shared root file unchanged.
+3. ZIP the staged package. In the portal, inspect MCPs and confirm the saved Authentication is OAuth before connecting. Resolve discovery or registration problems before scan or submission. If credentials become required, enter them only in the private connection flow.
+
+Support details were verified against the product source: `app/support/page.tsx` implements `/support`; `app/privacy/page.tsx` and `app/terms/page.tsx` publish `hello@idiolect.app`. No support destination was invented.

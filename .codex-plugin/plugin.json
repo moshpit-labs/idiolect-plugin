@@ -15,5 +15,11 @@
     "displayName": "Idiolect AI",
     "shortDescription": "Write in your voice",
     "logo": "./assets/logo.png"
-  }
+  },
+  "keywords": [
+    "writing",
+    "personalization",
+    "writing-profile",
+    "productivity"
+  ]
 }

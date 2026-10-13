@@ -36,3 +36,8 @@ test('rejects missing listing asset', (t) => {
   const path = fixture(t, (root) => rmSync(resolve(root, 'assets/logo.png')));
   assert.throws(() => validate(path), /Missing asset/);
 });
+
+test('rejects missing OpenAI OAuth import declaration', (t) => {
+  const path = fixture(t, (root) => edit(root, 'submission/openai/mcp.json', (v) => { v.mcpServers.idiolect.extensions['com.openai'].auth.type = 'none'; }));
+  assert.throws(() => validate(path), /OpenAI import must declare OAuth/);
+});

@@ -42,7 +42,9 @@ codex mcp login idiolect
 ```
 
 The CLI commands connect the tools; they do not install this package's writing skill.
-Public OpenAI submission requires its own connection and review. No registered app ID is bundled here.
+Public OpenAI submission uses the explicit OAuth import variant at `submission/openai/mcp.json`.
+Copy it over root `mcp.json` in a separate submission staging directory. Do not replace the shared portable file.
+The portal imports authentication from this file; no registered app ID or secret is bundled here.
 
 ### Cursor and other Agent Plugins hosts
 
@@ -100,7 +102,7 @@ Current documentation was checked on 13 October 2026. Format support is document
 | Host | Package | Validation status |
 | --- | --- | --- |
 | Claude Code | `.claude-plugin/`, `.mcp.json`, skill, commands | Strict plugin and marketplace validation passed on 2.1.281; OAuth and writing not exercised |
-| Codex | Root Agent Plugins format and compatibility manifest | Deterministic artifact checks passed; local CLI binary unavailable; host install/OAuth untested |
+| Codex | Root Agent Plugins format and compatibility manifest | Artifact checks passed; CLI 0.160.1 and OAuth initiation reached live consent; callback, package install, and writing untested |
 | Cursor | Root Agent Plugins format | Deterministic artifact checks passed; host install/OAuth untested |
 | Gemini CLI | `gemini-extension.json`, shared skill | Deterministic artifact checks passed; host install/OAuth untested |
 
