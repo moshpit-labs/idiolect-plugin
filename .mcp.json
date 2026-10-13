@@ -1,9 +1,8 @@
 {
   "mcpServers": {
     "idiolect": {
-      "command": "node",
-      "args": ["${CLAUDE_PLUGIN_ROOT}/server.mjs"],
-      "env": { "IDIOLECT_API_KEY": "${IDIOLECT_API_KEY}", "IDIOLECT_BASE": "https://idiolect.lol" }
+      "type": "http",
+      "url": "https://idiolect.app/api/mcp"
     }
   }
 }

@@ -1,7 +1,8 @@
 ---
-description: Draft a new piece of writing in your voice based on a brief.
+description: Write a new piece in your voice from a brief.
 ---
-Draft the following in my voice using the idiolect `draft_in_voice` tool (pick a sensible format), then show it with its Voice Match.
+Use Idiolect AI `write` to draft directly from this brief. Put the user's writing directions in `instructions`.
+Follow any returned setup continuation. Preserve the returned writing. Do not add a score.
 
 Brief:
 $ARGUMENTS

@@ -1,9 +1,19 @@
 {
   "name": "idiolect",
-  "version": "0.1.0",
-  "description": "Write in your own voice — Idiolect rewrites/drafts/scores in your voice.",
-  "author": "Idiolect",
-  "homepage": "https://idiolect.lol",
-  "mcp": ".mcp.json",
-  "skills": ["skills/in-your-voice/SKILL.md"]
+  "version": "0.4.0",
+  "description": "Write and revise emails, messages, posts, and docs in your voice with your portable Writing Profile.",
+  "author": {
+    "name": "Idiolect AI",
+    "url": "https://idiolect.app"
+  },
+  "homepage": "https://idiolect.app",
+  "repository": "https://github.com/Moshpit-Labs/idiolect-plugin",
+  "license": "MIT",
+  "mcpServers": "./.mcp.json",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Idiolect AI",
+    "shortDescription": "Write in your voice",
+    "logo": "./assets/logo.png"
+  }
 }

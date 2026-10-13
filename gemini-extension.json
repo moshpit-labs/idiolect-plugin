@@ -1,0 +1,10 @@
+{
+  "name": "idiolect",
+  "version": "0.4.0",
+  "description": "Write and revise emails, messages, posts, and docs in your voice with your portable Writing Profile.",
+  "mcpServers": {
+    "idiolect": {
+      "httpUrl": "https://idiolect.app/api/mcp"
+    }
+  }
+}

@@ -1,7 +1,8 @@
 ---
-description: Rewrite the provided text in your voice.
+description: Rewrite supplied prose in your voice.
 ---
-Rewrite the following text in my voice using the idiolect `rewrite_in_voice` tool, then show the result and its Voice Match score.
+Use Idiolect AI `rewrite` with the following prose in `text`. Keep writing directions in `instructions`.
+Follow any returned setup continuation. Preserve the returned writing. Do not add a score.
 
 Text:
 $ARGUMENTS

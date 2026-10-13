@@ -1,7 +1,17 @@
 {
   "name": "idiolect",
-  "owner": { "name": "Idiolect", "url": "https://idiolect.lol" },
+  "owner": {
+    "name": "Idiolect AI",
+    "url": "https://idiolect.app"
+  },
   "plugins": [
-    { "name": "idiolect", "source": "./", "description": "Write in your own voice inside Claude Code — rewrite/draft/score via Idiolect." }
-  ]
+    {
+      "name": "idiolect",
+      "source": "./",
+      "description": "Write and revise emails, messages, posts, and docs in your voice with your portable Writing Profile."
+    }
+  ],
+  "metadata": {
+    "description": "Idiolect AI writing tools and skill."
+  }
 }

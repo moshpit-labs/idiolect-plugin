@@ -1,4 +1,5 @@
 ---
-description: See a summary of your writing voice.
+description: View your current Writing Profile.
 ---
-Call the idiolect `get_my_voice` tool and show me a short summary of my writing voice.
+Use Idiolect AI `view_writing_profile` and summarize the returned Writing Profile for the user.
+Do not keep a saved copy or invent a score.

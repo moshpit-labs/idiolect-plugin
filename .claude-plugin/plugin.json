@@ -1,8 +1,18 @@
 {
   "name": "idiolect",
-  "version": "0.1.0",
-  "description": "Write in YOUR voice. Idiolect rewrites what the agent drafts on your behalf into your own writing voice — and scores how close it got, on a validated fidelity metric.",
-  "author": { "name": "Idiolect", "url": "https://idiolect.lol" },
-  "homepage": "https://idiolect.lol",
-  "license": "MIT"
+  "version": "0.4.0",
+  "description": "Write and revise emails, messages, posts, and docs in your voice with your portable Writing Profile.",
+  "author": {
+    "name": "Idiolect AI",
+    "url": "https://idiolect.app"
+  },
+  "homepage": "https://idiolect.app",
+  "repository": "https://github.com/Moshpit-Labs/idiolect-plugin",
+  "license": "MIT",
+  "displayName": "Idiolect AI",
+  "icon": "./assets/logo.png",
+  "documentationUrl": "https://github.com/Moshpit-Labs/idiolect-plugin#readme",
+  "supportUrl": "https://idiolect.app/support",
+  "privacyPolicyUrl": "https://idiolect.app/privacy",
+  "termsOfServiceUrl": "https://idiolect.app/terms"
 }
